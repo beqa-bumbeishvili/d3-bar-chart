@@ -42,4 +42,3 @@ function fillData(columnQuantity, rowQuantity){
     }
     return array;
 }
-
