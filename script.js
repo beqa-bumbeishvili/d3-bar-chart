@@ -25,19 +25,19 @@ rect.on("mouseleave", mouseLeaveBehaviour);
 
 function mouseEnterBehaviour() {
     element = d3.select(this);
+    groupTransform = d3.select(this.parentElement).attr("transform");
+    groupY = groupTransform.substring(groupTransform.indexOf("(")+1, groupTransform.indexOf(")")).split(",")[1];
     element.attr("fill", d => "#" + ((1 << 24) * Math.random() | 0).toString(16))
         .transition()
         .delay(100)
         .duration(500)
         .style("color", "red")
-        .attr("x", (Math.floor(Math.random() * (windowWidth - 1 + 1)) + 1))
-        .attr("y", (Math.floor(Math.random() * (windowHeight - 1 + 1)) + 1));
-
+        .attr("x", (Math.floor(Math.random() * ((windowWidth-100) - 1 + 1)) + 1))
+        .attr("y", (Math.floor(Math.random() * ((windowHeight - groupY - element.attr("height") - 10) - (element.attr("y") - groupY) + 1)) + (element.attr("y") - groupY)));
 }
 
 function mouseLeaveBehaviour() {
     element = d3.select(this);
-    element.attr("fill", "teal");
 }
 
 function fillData(columnQuantity, rowQuantity) {
