@@ -1,20 +1,23 @@
 windowHeight = innerHeight;
 windowWidth = innerWidth;
+console.log(innerWidth);
 var dataset = fillData(30, 10);
 
 var svg = d3.select("body")
-    .append("svg").style("overflow", "visible");
+    .append("svg")
+    .style("overflow", "visible");
 
 var group = svg
     .selectAll("g")
     .data(dataset)
-    .enter().append("g")
+    .enter()
+    .append("g")
     .attr("transform", (d, i) => "translate(" + 0 + "," + i * (windowHeight / dataset.length - 1) + ")");
 
 rect = group.selectAll("rect")
     .data(function (d) { return d })
     .enter().append("rect")
-    .attr("x", function (d, i) { return i * 43; })
+    .attr("x", function (d, i) { return i * windowWidth/30; })
     .attr("y", function (d, i) { return windowHeight / 10 - d; })
     .attr("width", windowWidth / 30 - 4)
     .attr("height", function (d, i) { return d; })
